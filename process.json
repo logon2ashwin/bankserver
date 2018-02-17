@@ -1,0 +1,17 @@
+{
+  "apps" : [{
+    "name"        : "bankserver",
+    "script"      : "./server.js",
+    "watch"       : true,
+    "ignore_watch" : ["node_modules", "db", ".git"],
+    "env_development": {
+      "ENVIRONMENT": "dev"
+    },
+    "env_test": {
+      "ENVIRONMENT": "test"
+    },
+    "env_production" : {
+      "ENVIRONMENT": "prod"
+    }
+  }]
+}
