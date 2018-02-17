@@ -52,7 +52,8 @@ module.exports = function (express, mongoose) {
 					res.send({status: "error"});
 				}
 			})
-        },
+		},
+		
         searchuser: function(req, res){
             //console.log("Search User");      
 			//console.log(req.query.key);
@@ -70,7 +71,8 @@ module.exports = function (express, mongoose) {
 					res.send({status: "error"});
 				}
 			})
-        },
+		},
+		
         getuser: function(req, res){
             //console.log("Get user Detail");
             if(req.params.id){
@@ -91,7 +93,8 @@ module.exports = function (express, mongoose) {
                     }
                 })
             }
-        },
+		},
+		
         getreferal: function(req, res){
             //console.log("Get referral user");
             if(req.params.id){
@@ -104,7 +107,8 @@ module.exports = function (express, mongoose) {
                     }
                 })
             }
-        },
+		},
+		
 		confirmEmail: function(req, res){
 			//console.log("data with query"+req.body.token);
 			accountService.confirmEmail(req.body.token).then(function(result){
@@ -113,6 +117,7 @@ module.exports = function (express, mongoose) {
 				return res.send({success: false, error: {message: err.message, code: 20938}});
 			})
 		},
+
 		resetPassword: function(req, res){
 			//console.log("Reset Password")
 			var data = req.body;
@@ -122,6 +127,7 @@ module.exports = function (express, mongoose) {
 				return res.send({error: {message: err.message, code: 20938}});
 			});
 		},
+
 		forgotPassword: function(req, res){
 			//console.log("Forgot Password")
 			if(req.body.email){
@@ -134,6 +140,7 @@ module.exports = function (express, mongoose) {
 				return res.send({error: {message: "Invalid Parameter"}});
 			}
 		},
+
 		changePassword: function(req, res){
 			//console.log("password change");
 			var password={};
@@ -156,6 +163,7 @@ module.exports = function (express, mongoose) {
 				}
 			})
 		},
+
 		updateprofile: function(req, res){
 			//console.log("update profile information");
 			if(req.query.userrole=='admin'){
@@ -251,7 +259,8 @@ sociallogin: function(req,res) {
     	res.json({ status: 'invalid_user' })
     }
 
-        },
+		},
+		
         login: function(req,res){
             //console.log("login user");
             //console.log(req.body)

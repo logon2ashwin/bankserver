@@ -6,19 +6,15 @@ var template = function (callback) {
     var crypto = require("crypto");
     var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
-    var modelName = "accounts";   //model name
+    var modelName = "transactions";   //model name
 
     var model = new Schema({
-        name: {type: String},
-        country: {type: String},
-        phone: {type: String},
-        email: {type: String},
-        username: {type: String},
-        password: {type: String},
-	    role: {type: String, enum: ["admin","manager","staff","user"], default: "user"},	
-        current_date: {type: Date, default: Date.now},
-        accountid : [{type: Schema.Types.ObjectId, ref: 'accountdetails'}]
-           
+       transactionamount : { type: Number },
+       transactiontime : { type: Date, default: Date.now },
+       fromaccount : { type: Number},
+       toaccount : { type: Number},
+       fromaccountid : { type: Schema.Types.ObjectId, ref: 'accountdetails'},
+       toaccountid : { type: Schema.Types.ObjectId, ref: 'transactions'}
     });
 
     model.pre('save', function(next) {

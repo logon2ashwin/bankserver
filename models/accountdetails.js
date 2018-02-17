@@ -1,4 +1,3 @@
-
 var template = function (callback) {
 
     var mongoose = require('mongoose');
@@ -7,17 +6,13 @@ var template = function (callback) {
     var crypto = require("crypto");
     var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
-    var modelName = "attachments";   //model name
+    var modelName = "accountdetails";   //model name
 
     var model = new Schema({
-        filename: {type: String},
-		projectid: {type: Schema.Types.ObjectId, ref: 'projects'},
-		emailid: {type: Schema.Types.ObjectId, ref: 'emails'},
-		clientid: {type: String},
-		causerid: {type: String},
-		casessionid: {type: String},
-        created_At: {type:Date},
-        updated_At: {type:Date}
+        accountnumber : { type: Number },
+        accountbalance : {type: Number },
+        lasttransaction : { type: Schema.Types.ObjectId, ref: 'transactions'}
+           
     });
 
     model.pre('save', function(next) {
