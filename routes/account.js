@@ -138,7 +138,7 @@ module.exports = function (express, mongoose) {
                     if (user.password != req.body.password) {
                         res.status(401).send({error: {message: "Wrong password"}});
                     }else{
-						res.send({status:'success',data : user});
+						res.send({status:'success',id : user._id});
 					}
 					
                 }
