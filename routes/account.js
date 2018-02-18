@@ -11,8 +11,9 @@ module.exports = function (express, mongoose) {
     
     var accountRoute = {
     
-        getalluser: function(req, res){
+        getaccount: function(req, res){
 			var options={};
+			options.id = mongoose.Types.ObjectId(req.query.id);
 			account.find(options)
 					.exec(function(err,content){
 				if (!err) {
@@ -208,7 +209,7 @@ router.post('/resetPassword', accountRoute.resetPassword);
 router.post('/forgotPassword', accountRoute.forgotPassword);
 router.post("/changepwd/:id", accountRoute.changePassword);
 router.get('/search', accountRoute.searchuser);
-router.get('/list', accountRoute.getalluser);
+router.get('/accountdetails', accountRoute.getaccount);
 router.post('/update/:id', accountRoute.updateprofile);
 router.delete('/deleteuser', accountRoute.deleteuser);
 router.get('/edituser/:id', accountRoute.edituser);
