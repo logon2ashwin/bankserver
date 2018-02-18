@@ -131,70 +131,16 @@ module.exports = function (express, mongoose) {
 		},
 		
         login: function(req,res){
-            account.findOne({ $or: [ { "username": req.body.username }, { "email": req.body.email } ],  "password": req.body.password  }).exec().then(function (user) {
+            account.findOne({ $or: [ { "username": req.body.username }, { "email": req.body.username } ],  "password": req.body.password  }).exec().then(function (user) {
                 if (!user) {
                     return res.status(401).send({error: {message: "User not found"}});
                 } else {
                     if (user.password != req.body.password) {
-                        res.status(401).send({error: {message: "Wrong password"}})
-                    } else {
-						if (user.emailToken) {
-							res.status(401).send({
-								error: {
-									message: "You must activate your email",
-									code: 40987,
-									email: user.email
-								}
-							});
-						} else if (user.status == "block") {
-							res.status(401).send({
-								error: {
-									message: "Your account has been blocked. Contact our support team for more details.",
-									code: 40987,
-									email: user.email
-								}
-							});
-						} else {
-							var newtoken;
-							//console.log("login success")
-							auth.findOne({user_id:user._id}).exec().then(function(data){
-								if(data){
-								   newtoken=  gencode.generateToken();
-									//console.log("update token")
-									var temp={
-										token:newtoken,
-										session:new Date()
-									}
-									auth.update({user_id: user._id}, temp).exec().then(function(count){
-										//console.log(count);
-										if(count.ok==1){
-											return res.status(200).send({status:'authenticated',token:temp.token,userid:user});
-										}
-										else{
-											res.json({status:'invalid_user'})
-										}
-									})
-								}else{
-								   newtoken=  gencode.generateToken();
-									//console.log("new token")
-									var temp={
-										user_id:user._id,
-										token:newtoken,
-										session:new Date()
-									}
-									var authtype = new auth(temp);
-									authtype.save(function (err, value){     // data saved in product collection
-										if (!err){
-											//console.log(value)
-											return res.status(200).send({status:'authenticated',token:temp.token,userid:user});
-										}else{
-											res.json({status:'invalid_user'})
-										}
-									});
-								}
-							})
-						}
+                        res.status(401).send({error: {message: "Wrong password"}});
+                    }else{
+						res.send({status:'success',data : user});
 					}
+					
                 }
             })
         },
@@ -209,7 +155,7 @@ module.exports = function (express, mongoose) {
 		        		if (err) {
 		        			res.send({result:"error"});
 		        		}else{
-		        			res.send({result:"success"});
+		        			res.send({result:"success", id: result._id});
 		        		}
 		        	})		
         		}
