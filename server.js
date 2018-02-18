@@ -38,7 +38,7 @@ app.use(function(req, res, next){
 
 
 app.use("/api/"+config.service.apiversion + "/account", require("./routes/account.js")(express, Mongoose));
-app.use("/api/"+config.service.apiversion + "/email", require("./routes/email.js")(express, Mongoose));
+
 
 app.get('/', function (req, res) {
   res.send('Hello World!')

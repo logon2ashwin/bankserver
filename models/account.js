@@ -15,13 +15,8 @@ var template = function (callback) {
         profilepicture: {type: String},
         email: {type: String},
         username: {type: String},
-        password: {type: String},
-	social_name: {type: String},
-	socialtype: {type: String},
-	socialid: {type: String},
-	social_token: {type: String},
-	role: {type: String, enum: ["admin","leader","scorer","user"], default: "user"},	
-        cd: {type: Date, default: Date.now}   
+        password: {type: String},	
+        created_date: {type: Date, default: Date.now}   
     });
 
     model.pre('save', function(next) {
