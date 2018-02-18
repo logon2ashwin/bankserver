@@ -17,9 +17,9 @@ module.exports = {
         password: "",
         from: "ashwin.95b@gmail.com",
         service: "mailgun",
-	host: "smtp.mailgun.org",
-	port: 587,
-	trackerimage: "/logo_tiny.png"
+        host: "smtp.mailgun.org",
+        port: 587,
+        trackerimage: "/logo_tiny.png"
     },
 	googlemaps:{
 		key: "AIzaSyCAZS4vCDwjVZgs-COeAC0YQfJAZv8BQk4"
