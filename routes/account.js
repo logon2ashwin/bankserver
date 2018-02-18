@@ -13,8 +13,8 @@ module.exports = function (express, mongoose) {
     
         getaccount: function(req, res){
 			var options={};
-			options.id = mongoose.Types.ObjectId(req.query.id);
-			account.find(options)
+			options._id = mongoose.Types.ObjectId(req.query.id);
+			account.findOne(options)
 					.exec(function(err,content){
 				if (!err) {
 					res.send({status: "success",data: content});
