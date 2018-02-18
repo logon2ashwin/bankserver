@@ -200,7 +200,9 @@ module.exports = function (express, mongoose) {
         },
         createuser: function(req,res){
         	var newuser = req.body;
-        	account.find({email:newuser.email}).exec().then(function(user){
+        	account.find({email:newuser.email})
+        	.exec()
+        	.then(function(user){
         		if(user.length == 0){
         			var createnewuser = new account(newuser);
         			createnewuser.save(function(err,result){
@@ -261,9 +263,7 @@ router.post('/forgotPassword', accountRoute.forgotPassword);
 router.post("/changepwd/:id", accountRoute.changePassword);
 router.get('/search', accountRoute.searchuser);
 router.get('/list', accountRoute.getalluser);
-// router.get('/:id', accountRoute.getuser);
 router.post('/update/:id', accountRoute.updateprofile);
-// router.post('/createuser', accountRoute.createuser);
 router.delete('/deleteuser', accountRoute.deleteuser);
 router.get('/edituser/:id', accountRoute.edituser);
 router.put('/updateuser', accountRoute.updateuser);

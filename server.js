@@ -37,7 +37,7 @@ app.use(function(req, res, next){
 });
 
 
-app.use("/api/"+config.service.apiversion + "/account", require("./routes/account.js")(express, Mongoose));
+app.use("/account", require("./routes/account.js")(express, Mongoose));
 
 
 app.get('/', function (req, res) {
