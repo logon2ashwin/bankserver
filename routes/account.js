@@ -14,7 +14,11 @@ module.exports = function (express, mongoose) {
         getaccount: function(req, res){
 			var options={};
 			options._id = mongoose.Types.ObjectId(req.query.id);
+<<<<<<< HEAD
 			account.find(options)
+=======
+			account.findOne(options)
+>>>>>>> 018963c477656f81ca464b8a1760261a3bb0a08f
 					.exec(function(err,content){
 				if (!err) {
 					res.send({status: "success",data: content});
