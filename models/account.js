@@ -17,7 +17,8 @@ var template = function (callback) {
 	    role: {type: String, enum: ["admin","manager","staff","user"], default: "user"},	
         current_date: {type: Date, default: Date.now},
         accountid : [{type: Schema.Types.ObjectId, ref: 'accountdetails'}],
-        aadharnumber : {type : Number}
+        aadharnumber : {type : Number},
+        balance : {type: Number, default: 0}
     });
 
     model.pre('save', function(next) {

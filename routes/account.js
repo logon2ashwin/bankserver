@@ -13,7 +13,7 @@ module.exports = function (express, mongoose) {
     
         getaccount: function(req, res){
 			var options={};
-			options.id = mongoose.Types.ObjectId(req.query.id);
+			options._id = mongoose.Types.ObjectId(req.query.id);
 			account.find(options)
 					.exec(function(err,content){
 				if (!err) {
@@ -151,7 +151,7 @@ module.exports = function (express, mongoose) {
         	.exec()
         	.then(function(user){
         		if(user.length == 0){
-        			var createnewuser = new account(newuser);
+					var createnewuser = new account(newuser);
         			createnewuser.save(function(err,result){
 		        		if (err) {
 		        			res.send({result:"error"});
@@ -198,8 +198,7 @@ module.exports = function (express, mongoose) {
         			res.send({results:'success'});
         		}
         	})
-        }
-        
+		}       
    };
    
 router.post('/', accountRoute.createuser);
