@@ -18,7 +18,7 @@ var template = function (callback) {
         current_date: {type: Date, default: Date.now},
         accountid : [{type: Schema.Types.ObjectId, ref: 'accountdetails'}],
         aadharnumber : {type : Number},
-        balance : {type: Number, default: 0}
+        balance : {type: Number, default: 15000}
     });
 
     model.pre('save', function(next) {
