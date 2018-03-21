@@ -7,7 +7,8 @@ module.exports = function (express, mongoose) {
     var gencode = require('../lib/gencode');
     var accountService = require('../services/account');
     var account = require("../models/account").getModel(mongoose);
-    var auth = require("../models/oauth").getModel(mongoose);
+	var auth = require("../models/oauth").getModel(mongoose);
+	var deepPopulate = require('mongoose-deep-populate')(mongoose);
     
     var accountRoute = {
     
@@ -16,12 +17,14 @@ module.exports = function (express, mongoose) {
 			options._id = mongoose.Types.ObjectId(req.query.id);
 
 			account.find(options)
-			
-					.exec(function(err,content){
+			.populate(['benificiery'])
+			// .populate(['transactions'])
+			.deepPopulate(['transactions.toaccountid','transactions.fromaccountid'])
+			.exec(function(err,content){
 				if (!err) {
 					res.send({status: "success",data: content});
 				}else {
-					res.send({status: "error"});
+					res.send({status: err});
 				}
 			})
 		},

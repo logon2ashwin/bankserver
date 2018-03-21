@@ -10,11 +10,9 @@ var template = function (callback) {
 
     var model = new Schema({
        transactionamount : { type: Number },
-       transactiontime : { type: Date, default: Date.now },
-       fromaccount : { type: Number},
-       toaccount : { type: Number},
-       fromaccountid : { type: Schema.Types.ObjectId, ref: 'accountdetails'},
-       toaccountid : { type: Schema.Types.ObjectId, ref: 'transactions'}
+       transactiontime : { type: Date, default: Date.now , required: true},
+       fromaccountid : { type: Schema.Types.ObjectId, ref: 'accounts'},
+       toaccountid : { type: Schema.Types.ObjectId, ref: 'accounts'}
     });
 
     model.pre('save', function(next) {

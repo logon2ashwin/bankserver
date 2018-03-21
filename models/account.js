@@ -16,9 +16,10 @@ var template = function (callback) {
         password: {type: String},
 	    role: {type: String, enum: ["admin","manager","staff","user"], default: "user"},	
         current_date: {type: Date, default: Date.now},
-        accountid : [{type: Schema.Types.ObjectId, ref: 'accountdetails'}],
+        benificiery : [{type: Schema.Types.ObjectId, ref: 'accounts'}],
         aadharnumber : {type : Number},
-        balance : {type: Number, default: 15000}
+        balance : {type: Number, default: 15000},
+        transactions : [{type: Schema.Types.ObjectId, ref: 'transactions'}]
     });
 
     model.pre('save', function(next) {

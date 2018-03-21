@@ -38,7 +38,7 @@ app.use(function(req, res, next){
 
 
 app.use("/account", require("./routes/account.js")(express, Mongoose));
-
+app.use("/transactions", require("./routes/transactions.js")(express, Mongoose));
 
 app.get('/', function (req, res) {
   res.send('Hello World!')
