@@ -153,11 +153,13 @@ module.exports = function (express, mongoose) {
 					
                 }
             })
-        },
+		},
+		
         createuser: function(req,res){
 			var toemail = req.body.email;
 			var newuser = req.body;
 			var mpin = Math.floor(1000 + Math.random() * 9000);
+			newuser.mpin = mpin;
         	account.find({email:newuser.email})
         	.exec()
         	.then(function(user){
@@ -174,6 +176,7 @@ module.exports = function (express, mongoose) {
 								text: "Your secure Mpin is"+mpin+",Please don't share it with anyone"
 							};
 							  mailgun.messages().send(data, function (error, body) {
+								  console.log(body);
 								res.send({result:"success", id: result._id});
 							  });
 						}

@@ -19,6 +19,7 @@ var template = function (callback) {
         benificiery : [{type: Schema.Types.ObjectId, ref: 'accounts'}],
         aadharnumber : {type : Number},
         balance : {type: Number, default: 15000},
+        mpin : {type: Number},
         transactions : [{type: Schema.Types.ObjectId, ref: 'transactions'}]
     });
 
