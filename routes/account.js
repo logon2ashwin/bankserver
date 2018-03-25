@@ -10,8 +10,8 @@ module.exports = function (express, mongoose) {
 	var auth = require("../models/oauth").getModel(mongoose);
 	var deepPopulate = require('mongoose-deep-populate')(mongoose);
 	var mailgun = require("mailgun-js");
-	var api_key = 'key-edc143ae8437160613fb7f7bc252ff99';
-	var DOMAIN = 'sandbox4c143d13a6a343db850b230e1e2ad45c.mailgun.org';
+	var api_key = '';
+	var DOMAIN = '';
 	var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
     
     var accountRoute = {
@@ -169,16 +169,16 @@ module.exports = function (express, mongoose) {
 		        		if (err) {
 		        			res.send({result:"error"});
 						}else{
-							var data = {
-								from: 'admin@dsmt.in',
-								to: toemail,
-								subject: "Welcome to Dsmt",
-								text: "Your secure Mpin is"+mpin+",Please don't share it with anyone"
-							};
-							  mailgun.messages().send(data, function (error, body) {
-								  console.log(body);
+							// var data = {
+							// 	from: 'admin@dsmt.in',
+							// 	to: toemail,
+							// 	subject: "Welcome to Dsmt",
+							// 	text: "Your secure Mpin is"+mpin+",Please don't share it with anyone"
+							// };
+							//   mailgun.messages().send(data, function (error, body) {
+								//   console.log(body);
 								res.send({result:"success", id: result._id});
-							  });
+							//   });
 						}
 		        	})		
         		}
