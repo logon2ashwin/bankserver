@@ -9,6 +9,10 @@ module.exports = function (express, mongoose) {
     var account = require("../models/account").getModel(mongoose);
 	var auth = require("../models/oauth").getModel(mongoose);
 	var deepPopulate = require('mongoose-deep-populate')(mongoose);
+	var mailgun = require("mailgun-js");
+	var api_key = 'key-edc143ae8437160613fb7f7bc252ff99';
+	var DOMAIN = 'sandbox4c143d13a6a343db850b230e1e2ad45c.mailgun.org';
+	var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
     
     var accountRoute = {
     
@@ -151,7 +155,9 @@ module.exports = function (express, mongoose) {
             })
         },
         createuser: function(req,res){
-        	var newuser = req.body;
+			var toemail = req.body.email;
+			var newuser = req.body;
+			var mpin = Math.floor(1000 + Math.random() * 9000);
         	account.find({email:newuser.email})
         	.exec()
         	.then(function(user){
@@ -160,9 +166,17 @@ module.exports = function (express, mongoose) {
         			createnewuser.save(function(err,result){
 		        		if (err) {
 		        			res.send({result:"error"});
-		        		}else{
-		        			res.send({result:"success", id: result._id});
-		        		}
+						}else{
+							var data = {
+								from: 'admin@dsmt.in',
+								to: toemail,
+								subject: "Welcome to Dsmt",
+								text: "Your secure Mpin is"+mpin+",Please don't share it with anyone"
+							};
+							  mailgun.messages().send(data, function (error, body) {
+								res.send({result:"success", id: result._id});
+							  });
+						}
 		        	})		
         		}
         		else{

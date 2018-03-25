@@ -21,6 +21,7 @@
     "gridfs-stream": "^1.1.1",
     "handlebars": "^4.0.8",
     "lodash": "^4.17.4",
+    "mailgun-js": "^0.16.0",
     "moment": "^2.18.1",
     "mongoose": "^4.9.5",
     "mongoose-deep-populate": "^3.0.0",
