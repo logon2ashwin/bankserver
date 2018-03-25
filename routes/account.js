@@ -139,10 +139,10 @@ module.exports = function (express, mongoose) {
         login: function(req,res){
             account.findOne({ $or: [ { "username": req.body.username }, { "email": req.body.username } ],  "password": req.body.password  }).exec().then(function (user) {
                 if (!user) {
-                    return res.status(401).send({error: {message: "User not found"}});
+                    return res.send({error: {message: "User not found"}});
                 } else {
                     if (user.password != req.body.password) {
-                        res.status(401).send({error: {message: "Wrong password"}});
+                        res.send({error: {message: "Wrong password"}});
                     }else{
 						res.send({status:'success',id : user._id});
 					}
