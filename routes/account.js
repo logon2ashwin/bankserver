@@ -10,8 +10,8 @@ module.exports = function (express, mongoose) {
 	var auth = require("../models/oauth").getModel(mongoose);
 	var deepPopulate = require('mongoose-deep-populate')(mongoose);
 	var mailgun = require("mailgun-js");
-	var api_key = '';
-	var DOMAIN = '';
+	var api_key = 'key-edc143ae8437160613fb7f7bc252ff99';
+	var DOMAIN = 'sandbox4c143d13a6a343db850b230e1e2ad45c.mailgun.org';
 	var mailgun = require('mailgun-js')({apiKey: api_key, domain: DOMAIN});
     
     var accountRoute = {
